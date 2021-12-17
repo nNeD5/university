@@ -1,0 +1,79 @@
+\documentclass[lab6_2.tex]{subfiles}
+\usepackage[total={6in, 10in}]{geometry}
+
+%langue
+\usepackage[T1, T2A]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[english, ukrainian]{babel}
+
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{graphicx}
+\usepackage{color}
+\usepackage{listings}
+\usepackage{hyperref}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{epstopdf}
+\usepackage{matlab}
+
+\sloppy
+\epstopdfsetup{outdir=./}
+\graphicspath{ {./read_audio_images/} }
+
+\begin{document}
+
+\begin{par}
+\begin{flushleft}
+Задаєм константы t та Fs
+\end{flushleft}
+\end{par}
+
+\begin{matlabcode}
+t = 5;
+Fs = 8000;
+nBits = 16;
+nChannels = 1;
+deviceId = 1;
+\end{matlabcode}
+
+\begin{par}
+\begin{flushleft}
+Записуєм аудіо
+\end{flushleft}
+\end{par}
+
+\begin{matlabcode}
+disp("Start recording");
+\end{matlabcode}
+\begin{matlabcode}
+audio = audiorecorder(Fs, nBits, nChannels, deviceId);
+recordblocking(audio, t)
+disp("End recording")
+\end{matlabcode}
+
+\begin{par}
+\begin{flushleft}
+Виводим аудіо
+\end{flushleft}
+\end{par}
+
+\begin{matlabcode}
+play(audio);
+\end{matlabcode}
+
+\begin{par}
+\begin{flushleft}
+Записуєм аудіо до файлу
+\end{flushleft}
+\end{par}
+
+\begin{matlabcode}
+audio_data = getaudiodata(audio);
+audiowrite('audio.wav', audio_data, Fs);
+save('audio.mat', 'audio_data', 'Fs');
+\end{matlabcode}
+
+\end{document}

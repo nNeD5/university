@@ -1,0 +1,148 @@
+\documentclass[12pt]{article}
+\usepackage[total={6in, 10in}]{geometry}
+
+%langue
+\usepackage[T1, T2A]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[english, ukrainian]{babel}
+
+%code hi
+\usepackage{color} %red, green, blue, yellow, cyan, magenta, black, white
+\definecolor{mygreen}{RGB}{28,172,0} % color values Red, Green, Blue
+\definecolor{mylilas}{RGB}{170,55,241}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+\usepackage{listings}
+\lstset{language=Matlab,%
+    %basicstyle=\color{red},
+    frameround=ftff,
+    frame=single,
+    breaklines=true,%
+    morekeywords={matlab2tikz},
+    keywordstyle=\color{blue},%
+    morekeywords=[2]{1}, keywordstyle=[2]{\color{black}},
+    identifierstyle=\color{black},%
+    stringstyle=\color{mylilas},
+    commentstyle=\color{mygreen},%
+    showstringspaces=false,%without this there will be a symbol in the places where there is a space
+    numbers=left,%
+    numberstyle={\small \color{black}},% size of the numbers
+    numbersep=9pt, % this defines how far the numbers are from the text
+    emph=[1]{for,end,break},emphstyle=[1]\color{red}, %some words to emphasise
+    backgroundcolor=\color{backcolour}
+    %emph=[2]{word1,word2}, emphstyle=[2]{style},
+}
+
+\author{студент: Недождій Олексій Сергійович \\
+         викладач: Гордійко Наталія Олександрівна}
+\title{Mодульна Контрольна № 2\\
+    З методiв аналiзу та обробки\\
+    експериментальних даних\\
+       Варіант №16}
+\date{}
+
+\begin{document}
+\maketitle
+
+\begin{center}
+    {\Large \bf Умова}
+\end{center}
+Задана вибірка з 25 пар значень х та у. Користуючись відповідними формулами (лекція 6), обчислити коефіцієнти коваріації та кореляції. Перевірити отримані результати за допомогою стандартних функцій. Перевірити значущість кореляції, користуючись табл.А.1 (Додаток А, лекція 6).
+
+\vspace{1em}
+
+\begin{center}
+    \begin{tabular}{|c|c|c|c|c|c|c|c|c|}
+        \hline
+        i & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8\\
+        \hline
+        x & 25.2 & 26.4 & 26.0 & 25.8 & 24.0 & 25.7 & 25.7 & 26.1\\
+        \hline
+        y & 30.8 & 29.4 & 30.2 & 30.5 & 31.4 & 30.3 & 30.4 & 30.5\\
+        \hline
+    \end{tabular}
+\end{center}
+
+\vspace{1em}
+
+\begin{center}
+    \begin{tabular}{|c|c|c|c|c|c|c|c|c|}
+        \hline
+        i & 9 & 10 & 11 & 12 & 13 & 14 & 15 & 16\\
+        \hline
+        x & 26.1 & 25.8 & 25.9 & 26.2 & 25.6 & 25.4 & 26.6 & 26.2\\
+        \hline
+        y & 29.9 & 30.4 & 30.3 & 30.5 & 30.6 & 31.0 & 29.6 & 30.4\\
+        \hline
+    \end{tabular}
+\end{center}
+
+\vspace{1em}
+
+\begin{center}
+    \begin{tabular}{|c|c|c|c|c|c|c|c|c|c|}
+        \hline
+        i & 17 & 18 & 19 & 20 & 21 & 22 & 23 & 24 & 25\\
+        \hline
+        x & 26.0 & 22.1 & 25.9 & 25.8 & 25.9 & 26.3 & 26.1 & 26.0 & 26.4\\
+        \hline
+        y & 30.7 & 31.6 & 30.5 & 30.6 & 30.7 & 30.1 & 30.6 & 30.5 & 30.7\\
+        \hline
+    \end{tabular}
+\end{center}
+
+
+\newpage
+\begin{center}
+    {\Large \bf Програмний код}
+\end{center}
+
+\begin{lstlisting}
+x = [25.2 26.4 26.0 25.8 24.0
+    25.7 25.7 25.7 26.1 25.8
+    25.9 26.2 25.6 25.4 26.6
+    26.2 26.0 22.1 25.9 25.8
+    25.9 26.3 26.1 26.0 26.4];
+y = [30.8 29.4 30.2 30.5
+    31.4 30.3 30.4 30.5
+    29.9 30.4 30.3 30.5
+    30.6 31.0 29.6 30.4
+    30.7 31.6 30.5 30.6
+    30.7 30.1 30.6 30.5 30.7];
+
+%mean value
+x_mean = mean(x);
+y_mean = mean(y);
+
+%calculating sigma
+sigma_x = sqrt(sum((x - x_mean).^2 ) / length(x));
+sigma_y = sqrt(sum( (y - y_mean).^2 ) / length(y));
+sigma_xy = sum((y - y_mean) .* (x - x_mean)) / length(y);
+
+r_my = sigma_xy / ( sigma_x * sigma_y );
+r_native = corrcoef(x, y);
+
+c_my = sigma_xy;
+c_native = cov(x, y);
+
+%calculating corrcoeff mean error
+s_r = (1 - r_my^2) / (sqrt(n - 1));
+abs(r_my / s_r)); % |r / s_r|
+\end{lstlisting}
+
+
+\newpage
+\begin{center}
+    {\Large \bf Результат}
+\end{center}
+
+\noindent Коефіцієнт кореляції отриманий за допомогою формулою:\\
+$r = -0.765160$
+
+\noindent Коефіцієнт кореляції отриманий за допомогою функцій matlab:\\
+$r = -0.765160$
+
+\noindent Значущість кореляції$(r_0 = 0.7, n = 25)$:\\
+$P_N < 0.05\%$ (високозначуща)
+
+
+\end{document}
