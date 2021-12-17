@@ -1,0 +1,167 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[ukrainian]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage[dvips]{graphicx}
+\usepackage{gensymb}
+\usepackage{color,colortbl}
+\usepackage{booktabs}
+\usepackage[a4paper, total={6in, 8in}]{geometry}
+\usepackage{fullpage}
+\usepackage{setspace}
+
+%\doublespacing
+
+\setlength{\parindent}{0em}
+
+\author{ФФ-93 Недождій Олексій}
+
+\date{}
+
+\title{Дослід Франка Герца}
+
+\begin{document}
+\maketitle
+Формули для похибок:
+
+$\delta f_\text{ст} = \dfrac{1}{N}\sqrt{\sum_{i=1}^{N}(f_i - \vec{f})^{2}}$
+
+$\delta f_\text{сис} = \sqrt{\sum(\frac{\partial f}{\partial x_i} \cdot \delta x_i)}$
+
+$\delta f_\text{заг} = \sqrt{\delta^{2} f_\text{сси} + \delta^{2} f_\text{ст}}$
+
+\section*{Данні Експерименту}
+
+\begin{table}[!h]
+    \centering
+    \caption{\text{Експериментальні данні з осцилографа}}
+    \begin{tabular}{ccc}
+        \hline
+        $\overline{U}$, В & $\delta U$, В \\
+        \hline
+        2.125 & 0.101 & перeгин\\
+        4.300 & 0.050 & махимум\\
+        8.100 & 0.158 & перегин\\
+        10.425 & 0.062 & махимум\\
+        12.425 & 0.101 & перегин\\
+        15.525 & 0.135 & махимум\\
+        18.925 & 0.135 & перегин\\
+        22.075 & 0.135 & махимум\\
+        25.250 & 0.090 & перегин\\
+        29.700 & 0.112 & махимум\\
+        31.850 & 0.071 & перегин\\
+        34.375 &0.090 & махимум\\
+    \end{tabular}
+\end{table}
+
+\[
+    \delta U = \sqrt{0.05^{2} + (\frac{1}{4}\sum_{i=1}^4 (U_i - \overline{U})^{2})^{2}}
+.\]
+
+\begin{table}[!h]
+    \centering
+    \caption{\text{Експериментальні данні з аналізатора в кГц}}
+    \begin{tabular}{cc}
+        \hline
+        $\overline{max}_{left}$ & $\overline{max}_{right}$ \\
+        \hline
+        0.0255 & 0.0143 \\
+        0.0425 & 0.0348 \\
+        0.0635 & 0.0563 \\
+        0.0848 & 0.0783 \\
+        0.1050 & 0.0973 \\
+        0.1440 & 0.1398 \\
+        0.1850 & 0.1830  \\
+        \hline
+    \end{tabular}
+ \end{table}
+
+\newpage
+\begin{table}[!h]
+    \centering
+    \caption{\text{Середнє між $max_{left}$ та $max_{right}$ в кГц}}
+    \begin{tabular}{cc}
+        \hline
+        $\nu $ & $\delta \nu$ \\
+        \hline
+        19.875 & 6.920\\
+        38.625 & 5.592\\
+        59.875 & 5.421\\
+        81.500 & 5.257\\
+        101.125 & 5.592\\
+        141.875 & 4.557\\
+        184.000 & 4.153\\
+        \hline
+    \end{tabular}
+\end{table}
+
+В похибку був врахований ефект дрейфу нуля.
+В формулу для похибки додали центральне значення частоти.
+\[
+    \delta \nu = \sqrt{0.0005^2 + 0.004^{2} +
+    \frac{1}{8}\sum_{i=1}^8 (\nu_i - \overline{\nu})^{2}}
+.\]
+
+\section*{Осцилограф}
+\[
+    \Delta E_1 = e ({U_max2} - U_{max1}) = 11.2
+.\]
+
+
+
+\section*{Визначперегинення енергії переходу}
+
+З даних, отриманих на аналізаторі(середні значення):
+
+Щоб визначити енергію з досліду з аналізатором, скористаємось співвідношенням:
+
+\begin{equation}
+	E_x = \dfrac{E_0 \nu_0}{\nu_x}
+\end{equation}
+
+де $E_0 = 42$ еВ -- енергія живлення, їй відповідає частота $\nu_0 = 19$ Гц.
+
+Інструментальна похибка $\sigma_\nu = 4$ Гц;
+
+Похибка для енергії $\sigma_{E_1} = \delta_E \cdot E = \dfrac{E_0 \nu_0}{\nu_x} \dfrac{\sigma_\nu}{nu}, \; \sigma_{E_2} = \dfrac{E_0}{\nu_x} \sigma_\nu,$
+
+$\sigma_E = \sqrt{(\sigma_{E_1})^2 + (\sigma_{E_2})^2}$.
+
+Отже, моємо такі значення:
+
+\begin{table}[h]
+	\centering
+	\begin{tabular}{llll}
+		\hline
+		$\nu$, Гц & $\sigma_\nu$, Гц & $E$, еВ & $\sigma_E$, еВ\\
+
+		\hline
+	\end{tabular}
+\end{table}
+
+\begin{center}
+    \begin{tabular}{l|c}
+        \hline
+        $E$                         & $\nu$ \\
+        \hline
+         Перша енергiя збудження    & 31.2941 \\
+         \hline
+         Друга енергiя збудження    & 18.7765 \\
+         \hline
+         Третя енергiя збудження    & 12.5669 \\
+         \hline
+         Четверта енергiя збудження &  9.4104 \\
+         \hline
+         П'ята енергiя збудження    &  7.6    \\
+         \hline
+         Шоста енергiя збудження    &  5.5417 \\
+         \hline
+         Сьома енергiя збудження    &  4.3135 \\
+        \hline
+    \end{tabular}
+\end{center}
+
+\end{document}
